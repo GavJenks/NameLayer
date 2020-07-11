@@ -169,8 +169,7 @@ public class GroupManagerDao {
 	private static final String addPermissionById = "insert into permissionByGroup(group_id,role,perm_id) values(?,?,?);";
 	private static final String getPermission = "select pg.role,pg.perm_id from permissionByGroup pg inner join faction_id fi on fi.group_name=? "
 				+ "where pg.group_id = fi.group_id";
-	private static final String removePermission = "delete from permissionByGroup where group_id IN (SELECT group_id FROM faction_id WHERE group_name = ?) and role=? and perm_id=?;";
-	private static final String registerPermission = "insert into permissionIdMapping(perm_id,name) values(?,?);"; 
+	private static final String removePermission = "delete pbg from permissionByGroup pbg inner join faction_id fi on pbg.group_id = fi.group_id where fi.group_name = ? and role=? and perm_id=?;";private static final String registerPermission = "insert into permissionIdMapping(perm_id,name) values(?,?);"; 
 	private static final String getPermissionMapping = "select * from permissionIdMapping;";
 		
 	private static final String addBlacklistMember = "insert into blacklist(group_id, member_name) select group_id,? from faction_id where group_name=?;";
